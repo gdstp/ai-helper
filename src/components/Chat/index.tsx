@@ -18,39 +18,39 @@ export const Chat = ({
   const [text, setText] = useState("");
 
   return (
-    <div className="w-full h-[calc(100vh-140px)] lg:h-auto border border-neutral-06 rounded-lg">
-      <div className="w-full h-28 bg-neutral-06 rounded-tl-lg rounded-tr-lg p-6">
-        <div className="w-full flex items-center justify-between relative">
+    <div className="h-[calc(100vh-140px)] w-full rounded-lg border border-neutral-06 lg:h-auto">
+      <div className="h-28 w-full rounded-tl-lg rounded-tr-lg bg-neutral-06 p-6">
+        <div className="relative flex w-full items-center justify-between">
           <div className="flex flex-col gap-2">
-            <p className="text-neutral-01 text-3xl max-w-[200px] truncate lg:max-w-[450px]">
+            <p className="max-w-[200px] truncate text-3xl text-neutral-01 lg:max-w-[450px]">
               {fileName}
             </p>
-            <div className="flex gap-4 text-neutral-04 text-xs">
+            <div className="flex gap-4 text-xs text-neutral-04">
               <p>
                 First interaction:{" "}
-                <span className="text-neutral-01 font-bold">
+                <span className="font-bold text-neutral-01">
                   {firstInteraction}
                 </span>
               </p>
               <p>
                 Number of questions:{" "}
-                <span className="text-neutral-01 font-bold">
+                <span className="font-bold text-neutral-01">
                   {numberOfQuestions} items
                 </span>
               </p>
               <p>
                 AI Usage:{" "}
-                <span className="text-neutral-01 font-bold">{aiUsage}</span>
+                <span className="font-bold text-neutral-01">{aiUsage}</span>
               </p>
             </div>
           </div>
-          <div className="bg-shade-03 w-10 h-10 flex items-center justify-center rounded-full absolute top-0 right-0">
+          <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-shade-03">
             <Settings />
           </div>
         </div>
       </div>
-      <div className="h-[calc(100%-112px)] grid grid-cols-1 grid-rows-[1fr,98px]">
-        <div className="h-[100%-48px] gap-8 overflow-y-auto flex flex-col p-6 pt-0 mt-6">
+      <div className="grid h-[calc(100%-112px)] grid-cols-1 grid-rows-[1fr,98px]">
+        <div className="mt-6 flex h-[100%-48px] flex-col gap-8 overflow-y-auto p-6 pt-0">
           {new Array(2).fill(0).map((_, index) => (
             <MessageDialog
               key={index}
@@ -58,16 +58,16 @@ export const Chat = ({
             />
           ))}
         </div>
-        <div className="px-4 py-6 w-full">
-          <div className="relative w-full flex flex-rol gap-1 bg-neutral-08 border-2 border-neutral-06 rounded-lg p-1">
+        <div className="w-full px-4 py-6">
+          <div className="flex-rol relative flex w-full gap-1 rounded-lg border-2 border-neutral-06 bg-neutral-08 p-1">
             <input
-              className="w-full max-w-[calc(100%-72px)] focus:outline-none rounded-lg px-4 py-2 bg-transparent focus:bg-transparent h-12"
+              className="h-12 w-full max-w-[calc(100%-72px)] rounded-lg bg-transparent px-4 py-2 focus:bg-transparent focus:outline-none"
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
             <button
               disabled={!text}
-              className="px-4 py-3 absolute right-1 bg-primary-01 font-medium rounded-md disabled:bg-neutral-04"
+              className="absolute right-1 rounded-md bg-primary-01 px-4 py-3 font-medium disabled:bg-neutral-04"
             >
               Send
             </button>

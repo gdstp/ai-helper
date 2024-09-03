@@ -59,7 +59,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-neutral-07 border border-neutral-05">
+      <DialogContent className="border border-neutral-05 bg-neutral-07 sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>New Chat</DialogTitle>
           <DialogDescription>
@@ -74,7 +74,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a chat type" />
             </SelectTrigger>
-            <SelectContent className="bg-neutral-08 border-neutral-06">
+            <SelectContent className="border-neutral-06 bg-neutral-08">
               <SelectGroup className="text-neutral-01">
                 <SelectItem value={ChatType.PDF}>PDF File</SelectItem>
                 <SelectItem value={ChatType.URL}>Web Site URL</SelectItem>
@@ -82,7 +82,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <AnimateChangeInHeight className="flex flex-col w-full gap-1">
+          <AnimateChangeInHeight className="flex w-full flex-col gap-1">
             {chatType === ChatType.PDF && (
               <PdfFile file={file} setFile={setFile} />
             )}
@@ -99,11 +99,11 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
         </div>
         <DialogFooter>
           <Button
-            className="py-5 w-full rounded-lg flex items-center justify-center gap-2"
+            className="flex w-full items-center justify-center gap-2 rounded-lg py-5"
             disabled={buttonDisabled}
             onClick={onSubmit}
           >
-            <Add className="w-7 h-7" />
+            <Add className="h-7 w-7" />
             Create Chat
           </Button>
         </DialogFooter>

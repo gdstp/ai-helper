@@ -29,10 +29,10 @@ export function PdfFileInfo({
           animate={{ opacity: 1, rotateX: 0 }}
           exit={{ opacity: 0, rotateX: 180 }}
         >
-          <div className="flex w-full items-center justify-center gap-2 pl-2 pr-4 py-4 border rounded-lg border-neutral-06">
-            <DocumentPdf className="w-12 h-12 text-neutral-03/90" />
-            <div className="flex flex-col gap-1 w-full">
-              <p className="text-sm truncate max-w-[250px] text-neutral-03/90">
+          <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-06 py-4 pl-2 pr-4">
+            <DocumentPdf className="h-12 w-12 text-neutral-03/90" />
+            <div className="flex w-full flex-col gap-1">
+              <p className="max-w-[250px] truncate text-sm text-neutral-03/90">
                 {file?.name}
               </p>
               <p className="text-xs text-neutral-03/50">
@@ -40,7 +40,7 @@ export function PdfFileInfo({
               </p>
             </div>
             <TrashCan
-              className="w-6 h-6 text-primary-03/80 cursor-pointer"
+              className="h-6 w-6 cursor-pointer text-primary-03/80"
               onClick={resetFile}
             />
           </div>

@@ -3,8 +3,8 @@ import { Chat } from "@/components/Chat";
 
 export default function Home() {
   return (
-    <div className="w-full h-auto lg:h-screen bg-neutral-08 flex flex-col relative">
-      <div className="w-full lg:w-[calc(100vw-80px)] h-full lg:h-[calc(100vh-80px)] m-auto bg-neutral-07 rounded-lg text-white p-3 flex lg:flex-row flex-col gap-3">
+    <div className="relative flex h-auto w-full flex-col bg-neutral-08 lg:h-screen">
+      <div className="m-auto flex h-full w-full flex-col gap-3 rounded-lg bg-neutral-07 p-3 text-white lg:h-[calc(100vh-80px)] lg:w-[calc(100vw-80px)] lg:flex-row">
         <ChatHistory />
         <Chat
           fileName="Tails_of_the_Sea.pdf"

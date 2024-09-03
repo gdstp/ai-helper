@@ -19,10 +19,10 @@ export function FileInput({ loadedFile, setFile, setLoadedFile }: Props) {
         >
           <label
             htmlFor="upload"
-            className="bg-neutral-08 text-sm flex items-center justify-center h-[84px] text-secondary border border-neutral-06 px-3 py-2 rounded-lg cursor-pointer"
+            className="flex h-[84px] cursor-pointer items-center justify-center rounded-lg border border-neutral-06 bg-neutral-08 px-3 py-2 text-sm text-secondary"
           >
-            <div className="bg-neutral-06 px-10 py-3 rounded-lg flex items-center justify-center gap-2">
-              <Export className="w-5 h-5" />
+            <div className="flex items-center justify-center gap-2 rounded-lg bg-neutral-06 px-10 py-3">
+              <Export className="h-5 w-5" />
               Select or drop PDF
             </div>
           </label>
