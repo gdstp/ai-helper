@@ -20,6 +20,7 @@ import { Button } from "../ui/button";
 import { useMemo, useState } from "react";
 import { PdfFile } from "./PdfFile";
 import { AnimateChangeInHeight } from "../AnimateChangeInHeight";
+import { useToast } from "@/hooks/use-toast";
 
 enum ChatType {
   PDF = "pdf",
@@ -29,13 +30,14 @@ enum ChatType {
 
 interface Props {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChange: () => void;
 }
 
 export function NewChatDialog({ onOpenChange, open }: Props) {
   const [chatType, setChatType] = useState<ChatType | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const { toast } = useToast();
 
   const buttonDisabled = useMemo(() => {
     if (chatType === ChatType.PDF) {
@@ -46,6 +48,14 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
       return !chatType;
     }
   }, [chatType, url, file]);
+
+  function onSubmit() {
+    toast({
+      title: "Chat created",
+      description: "Your new chat was created successfully",
+    });
+    onOpenChange();
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -91,6 +101,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
           <Button
             className="py-5 w-full rounded-lg flex items-center justify-center gap-2"
             disabled={buttonDisabled}
+            onClick={onSubmit}
           >
             <Add className="w-7 h-7" />
             Create Chat
