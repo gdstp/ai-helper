@@ -11,8 +11,8 @@ export const ChatHistoryTabItem = ({ onChange, selected, text }: Props) => {
     <div
       onClick={onChange}
       className={cn(
-        "w-1/2 py-1 justify-center rounded-full flex items-center gap-2 transition-all text-neutral-04",
-        selected && " bg-neutral-06 custom-shadow text-neutral-01"
+        "w-1/2 py-1 justify-center rounded-full flex items-center gap-2 transition-all text-neutral-04 z-10",
+        selected && "text-neutral-01"
       )}
     >
       <Chat />

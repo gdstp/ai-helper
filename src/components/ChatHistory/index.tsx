@@ -4,6 +4,7 @@ import { ChatHistoryTabItem } from "./ChatHistoryTabItem";
 import { NewChatDialog } from "../Chat/NewChatDialog";
 import { Button } from "../ui/button";
 import { Add } from "@carbon/icons-react";
+import { motion } from "framer-motion";
 
 export const ChatHistory = () => {
   const [usageTab, setUsageTab] = useState(false);
@@ -12,7 +13,15 @@ export const ChatHistory = () => {
   return (
     <div className="w-full h-80 lg:h-full lg:w-[540px]">
       <div className="px-4">
-        <div className="rounded-full px-1 bg-neutral-08 py-1 flex gap-1 cursor-pointer">
+        <div className="rounded-full px-1 bg-neutral-08 py-1 flex gap-1 cursor-pointer relative">
+          <motion.div
+            initial={{ x: usageTab ? "95%" : 0 }}
+            animate={{
+              x: usageTab ? "95%" : 0,
+              transition: { duration: 0.01 },
+            }}
+            className="w-1/2 py-1 justify-center rounded-full flex items-center gap-2 transition-all bg-neutral-06 custom-shadow text-neutral-01 absolute h-[32px]"
+          />
           <ChatHistoryTabItem
             onChange={() => setUsageTab(false)}
             selected={!usageTab}
