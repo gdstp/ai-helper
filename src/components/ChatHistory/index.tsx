@@ -51,7 +51,7 @@ export const ChatHistory = () => {
           {openNewChatDialog && (
             <NewChatDialog
               open={openNewChatDialog}
-              onOpenChange={setOpenNewChatDialog}
+              onOpenChange={() => setOpenNewChatDialog((state) => !state)}
             />
           )}
         </div>
