@@ -3,9 +3,15 @@ import { DocumentPdf } from "@carbon/icons-react";
 
 interface Props {
   selected?: boolean;
+  fileName?: string;
+  firstInteraction?: string;
 }
 
-export const ChatHistoryItem = ({ selected }: Props) => {
+export const ChatHistoryItem = ({
+  selected,
+  fileName,
+  firstInteraction,
+}: Props) => {
   return (
     <div
       className={cn(
@@ -18,10 +24,12 @@ export const ChatHistoryItem = ({ selected }: Props) => {
       </div>
       <div>
         <div className="flex flex-col justify-center gap-1">
-          <p className="text-sm font-medium">Placeholder.pdf</p>
+          <p className="text-sm font-medium">{fileName ?? "General Chat"}</p>
           <p className="text-xs text-neutral-04">
             First interaction:{" "}
-            <span className="font-bold text-neutral-01">Sep 2024</span>
+            <span className="font-bold text-neutral-01">
+              {firstInteraction ?? "Never"}
+            </span>
           </p>
         </div>
       </div>

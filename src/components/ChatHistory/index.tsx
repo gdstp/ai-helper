@@ -37,7 +37,12 @@ export const ChatHistory = () => {
       <div className="flex h-full flex-col gap-4">
         <div className="flex max-h-[calc(100%-124px)] w-full flex-col gap-2 overflow-auto px-2 py-4">
           {new Array(20).fill(0).map((_, index) => (
-            <ChatHistoryItem key={index} selected={index === 0} />
+            <ChatHistoryItem
+              fileName="Placeholder.pdf"
+              firstInteraction="24 July"
+              key={index}
+              selected={index === 0}
+            />
           ))}
         </div>
         <div className="flex w-full items-center justify-center">
