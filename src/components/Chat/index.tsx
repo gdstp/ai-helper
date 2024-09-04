@@ -1,6 +1,8 @@
 import { Settings } from "@carbon/icons-react";
 import { MessageDialog } from "./MessageDialog";
 import { useState } from "react";
+import { ApiService } from "@/lib/axios";
+import { useToast } from "@/hooks/use-toast";
 
 interface Props {
   fileName: string;
@@ -16,6 +18,37 @@ export const Chat = ({
   numberOfQuestions,
 }: Props) => {
   const [text, setText] = useState("");
+  const [messages, setMessages] = useState<
+    Array<{ origin: string; message: string }>
+  >([]);
+  const { toast } = useToast();
+
+  const submitMessage = async () => {
+    setMessages((prev) => [...prev, { origin: "user", message: text }]);
+    try {
+      const res = await ApiService.request({
+        method: "POST",
+        url: "/documents/question",
+        data: {
+          question: text,
+          document: fileName,
+        },
+      });
+
+      setMessages((prev) => [
+        ...prev,
+        { origin: "system", message: res.data.message },
+      ]);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit message",
+        variant: "destructive",
+      });
+      console.log(error);
+    }
+    setText("");
+  };
 
   return (
     <div className="h-[calc(100vh-140px)] w-full rounded-lg border border-neutral-06 lg:h-auto">
@@ -51,10 +84,11 @@ export const Chat = ({
       </div>
       <div className="grid h-[calc(100%-112px)] grid-cols-1 grid-rows-[1fr,98px]">
         <div className="mt-6 flex h-[100%-48px] flex-col gap-8 overflow-y-auto p-6 pt-0">
-          {new Array(2).fill(0).map((_, index) => (
+          {messages.map((item) => (
             <MessageDialog
-              key={index}
-              origin={index % 2 === 0 ? "user" : "root"}
+              key={item.message}
+              origin={item.origin}
+              message={item.message}
             />
           ))}
         </div>
@@ -67,6 +101,7 @@ export const Chat = ({
             />
             <button
               disabled={!text}
+              onClick={submitMessage}
               className="absolute right-1 rounded-md bg-primary-01 px-4 py-3 font-medium disabled:bg-neutral-04"
             >
               Send

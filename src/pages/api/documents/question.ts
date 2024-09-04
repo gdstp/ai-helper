@@ -42,7 +42,7 @@ export default async function handler(
       context: documents.map((doc) => doc),
     });
 
-    return res.status(200).json({ response: response.content });
+    return res.status(200).json({ message: response.content });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal Server Error" });

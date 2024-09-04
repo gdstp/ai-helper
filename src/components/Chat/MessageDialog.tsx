@@ -1,12 +1,15 @@
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
+import Typewriter from "../Typewriter";
 
 interface Props {
   origin: string;
+  message: string;
 }
 
-export const MessageDialog = ({ origin }: Props) => {
+export const MessageDialog = ({ origin, message }: Props) => {
   const originUser = useMemo(() => origin === "user", [origin]);
+
   return (
     <div
       className={cn(
@@ -22,12 +25,7 @@ export const MessageDialog = ({ origin }: Props) => {
         )}
       >
         <div className="flex w-full flex-col gap-4 text-[15px] leading-[24px] text-neutral-01">
-          <p>
-            Eu acho nao, eh tudo totalmente diferente das coisas de hoje do
-            mundo. E logicas de empresa. E muita coisa maravilhosa. Eu nao sou
-            partido, eu sou favoravel aqueles que realmente larga tudo pra
-            seguir a carreira.
-          </p>
+          <Typewriter text={message} delay={20} />
         </div>
       </div>
     </div>
