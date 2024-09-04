@@ -13,9 +13,9 @@ export function FileInput({ loadedFile, setFile, setLoadedFile }: Props) {
     <AnimatePresence>
       {!loadedFile && (
         <motion.div
-          initial={{ opacity: 0, rotateX: -180 }}
+          initial={{ opacity: 0, rotateX: -90 }}
           animate={{ opacity: 1, rotateX: 0 }}
-          exit={{ opacity: 0, rotateX: -180 }}
+          exit={{ opacity: 0, rotateX: -90 }}
         >
           <label
             htmlFor="upload"

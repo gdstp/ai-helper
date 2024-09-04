@@ -25,9 +25,9 @@ export function PdfFileInfo({
       {loadedFile && (
         <motion.div
           className="absolute top-0 w-full"
-          initial={{ opacity: 0, rotateX: 180 }}
+          initial={{ opacity: 0, rotateX: -90 }}
           animate={{ opacity: 1, rotateX: 0 }}
-          exit={{ opacity: 0, rotateX: 180 }}
+          exit={{ opacity: 0, rotateX: -90 }}
         >
           <div className="flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-06 py-4 pl-2 pr-4">
             <DocumentPdf className="h-12 w-12 text-neutral-03/90" />

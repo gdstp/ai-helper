@@ -1,14 +1,48 @@
 import { ChatHistoryItem } from "./ChatHistoryItem";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ChatHistoryTabItem } from "./ChatHistoryTabItem";
 import { NewChatDialog } from "../Chat/NewChatDialog";
 import { Button } from "../ui/button";
 import { Add } from "@carbon/icons-react";
 import { motion } from "framer-motion";
+import { ApiService } from "@/lib/axios";
+import { useToast } from "@/hooks/use-toast";
 
-export const ChatHistory = () => {
+interface Props {
+  selectedChat: string;
+  setSelectedChat: (chat: string) => void;
+}
+
+export const ChatHistory = ({ selectedChat, setSelectedChat }: Props) => {
   const [usageTab, setUsageTab] = useState(false);
   const [openNewChatDialog, setOpenNewChatDialog] = useState(false);
+  const [collections, setCollections] = useState<
+    { id: string; name: string }[]
+  >([]);
+  const { toast } = useToast();
+
+  const request = useCallback(async () => {
+    try {
+      const result = await ApiService.request({
+        url: "/documents/get-collections",
+        method: "GET",
+      });
+
+      console.log(result.data);
+
+      setCollections(result.data);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to fetch collections",
+        variant: "destructive",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    request();
+  }, [request]);
 
   return (
     <div className="h-80 w-full lg:h-full lg:w-[540px]">
@@ -34,14 +68,14 @@ export const ChatHistory = () => {
           />
         </div>
       </div>
-      <div className="flex h-full flex-col gap-4">
-        <div className="flex max-h-[calc(100%-124px)] w-full flex-col gap-2 overflow-auto px-2 py-4">
-          {new Array(20).fill(0).map((_, index) => (
+      <div className="grid h-[calc(100%-37px)] grid-cols-1 grid-rows-[1fr,98px]">
+        <div className="flex w-full flex-col gap-2 overflow-auto px-2 py-4 lg:max-w-[540px]">
+          {collections.map((item) => (
             <ChatHistoryItem
-              fileName="Placeholder.pdf"
-              firstInteraction="24 July"
-              key={index}
-              selected={index === 0}
+              key={item.id}
+              fileName={item.name}
+              onClick={() => setSelectedChat(item.name)}
+              selected={selectedChat === item.name}
             />
           ))}
         </div>

@@ -21,6 +21,7 @@ import { useMemo, useState } from "react";
 import { PdfFile } from "./PdfFile";
 import { AnimateChangeInHeight } from "../AnimateChangeInHeight";
 import { useToast } from "@/hooks/use-toast";
+import { ApiService } from "@/lib/axios";
 
 enum ChatType {
   PDF = "pdf",
@@ -49,12 +50,31 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
     }
   }, [chatType, url, file]);
 
-  function onSubmit() {
-    toast({
-      title: "Chat created",
-      description: "Your new chat was created successfully",
-    });
-    onOpenChange();
+  async function onSubmit() {
+    try {
+      const form = new FormData();
+      form.append("file", file!);
+      form.append("values", chatType!);
+      await ApiService.request({
+        url: "/documents/create",
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: form,
+      });
+      toast({
+        title: "Chat created",
+        description: "Your new chat was created successfully",
+      });
+      onOpenChange();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create chat",
+        variant: "destructive",
+      });
+    }
   }
 
   return (

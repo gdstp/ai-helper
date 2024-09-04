@@ -25,18 +25,15 @@ export default async function handler(
       fields: { values: Array<string> },
       file: { file: Array<File> },
     ];
-    console.log(file.file[0].originalFilename);
 
-    const rawChatType = fields.values[0];
-
-    const chatType = JSON.parse(rawChatType);
+    const chatType = fields.values[0];
 
     if (chatType === "pdf") {
       const loader = new PDFLoader(file.file[0].filepath, {
         splitPages: false,
       });
 
-      if (!file.file[0].originalFilename) {
+      if (!file?.file[0].originalFilename) {
         return res.status(500).json({ error: "Failed to load PDF" });
       }
 
