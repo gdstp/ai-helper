@@ -35,8 +35,6 @@ async function getAllCollections() {
   try {
     const collections = await client.listCollections();
 
-    console.log(collections);
-
     return collections;
   } catch (error) {
     console.error(error);
@@ -60,8 +58,23 @@ async function getDocument(id: string) {
   }
 }
 
+async function getCollection(collectionName: string) {
+  try {
+    const collection = await client.getCollection({
+      name: collectionName,
+      embeddingFunction,
+    });
+
+    return collection;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to get document");
+  }
+}
+
 export const ChromaClientService = {
   addDocuments,
   getDocument,
   getAllCollections,
+  getCollection,
 };
