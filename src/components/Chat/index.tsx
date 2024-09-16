@@ -1,4 +1,4 @@
-import { Settings } from "@carbon/icons-react";
+import { TrashCan } from "@carbon/icons-react";
 import { MessageDialog } from "./MessageDialog";
 import { useState } from "react";
 import { ApiService } from "@/lib/axios";
@@ -50,6 +50,24 @@ export const Chat = ({
     setText("");
   };
 
+  const deleteCollection = async () => {
+    setMessages((prev) => []);
+    try {
+      const res = await ApiService.request({
+        method: "DELETE",
+        url: "/documents/delete-collection?name=" + fileName,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delet chat",
+        variant: "destructive",
+      });
+      console.log(error);
+    }
+    setText("");
+  };
+
   return (
     <div className="h-[calc(100vh-140px)] w-full rounded-lg border border-neutral-06 lg:h-auto">
       <div className="h-28 w-full rounded-tl-lg rounded-tr-lg bg-neutral-06 p-6">
@@ -77,8 +95,11 @@ export const Chat = ({
               </p>
             </div>
           </div>
-          <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-shade-03">
-            <Settings />
+          <div
+            className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-red-400"
+            onClick={() => deleteCollection()}
+          >
+            <TrashCan className="text-neutral-08" />
           </div>
         </div>
       </div>

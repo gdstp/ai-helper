@@ -90,7 +90,10 @@ export const ChatHistory = ({ selectedChat, setSelectedChat }: Props) => {
           {openNewChatDialog && (
             <NewChatDialog
               open={openNewChatDialog}
-              onOpenChange={() => setOpenNewChatDialog((state) => !state)}
+              onOpenChange={() => {
+                setOpenNewChatDialog((state) => !state);
+                request();
+              }}
             />
           )}
         </div>

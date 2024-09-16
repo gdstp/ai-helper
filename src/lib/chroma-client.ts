@@ -72,9 +72,23 @@ async function getCollection(collectionName: string) {
   }
 }
 
+async function deleteCollection(collectionName: string) {
+  try {
+    await client.deleteCollection({
+      name: collectionName,
+    });
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to delete");
+  }
+}
+
 export const ChromaClientService = {
   addDocuments,
   getDocument,
   getAllCollections,
   getCollection,
+  deleteCollection,
 };
