@@ -38,6 +38,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
   const [chatType, setChatType] = useState<ChatType | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
   const buttonDisabled = useMemo(() => {
@@ -45,13 +46,13 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
       return !chatType || !file;
     } else if (chatType === ChatType.URL) {
       return !chatType || !url;
-    } else {
-      return !chatType;
     }
+    return !chatType;
   }, [chatType, url, file]);
 
   async function onSubmit() {
     try {
+      setLoading(true);
       const form = new FormData();
       form.append("file", file!);
       form.append("values", chatType!);
@@ -74,6 +75,8 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
         description: "Failed to create chat",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -122,6 +125,7 @@ export function NewChatDialog({ onOpenChange, open }: Props) {
             className="flex w-full items-center justify-center gap-2 rounded-lg py-5"
             disabled={buttonDisabled}
             onClick={onSubmit}
+            loading={loading}
           >
             <Add className="h-7 w-7" />
             Create Chat
