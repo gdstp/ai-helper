@@ -1,8 +1,10 @@
-# Showcase
-
 ## What is it?
 
 This project is a interface to simplify interacting with an AI using PDF, Web or General Chats. With this project a user can submit a pdf or url and question something specific about the file.
+
+## Showcase
+
+https://github.com/user-attachments/assets/6331d5c7-f187-42d0-80b3-bd9a8d4e9383
 
 ### Packages
 
